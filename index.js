@@ -1,11 +1,9 @@
 const express = require('express');
+const userRoute = require('./src/routes/user.route')
 const app = express();
 
-app.get("/", (req, res) => {
-  const soma = 100 + 1;
+app.use("/soma", userRoute);
 
-  res.send({soma: soma})
-});
 
 //ROTA é a porta de entrada da nossa API, do nosso backend
 //Method HTTP - É a forma como a internet se comunica - CRUD (CREATE, READ, UPDATE, DELETE)
