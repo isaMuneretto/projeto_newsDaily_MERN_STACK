@@ -1,8 +1,12 @@
 const express = require('express');
-const userRoute = require('./src/routes/user.route')
 const app = express();
 
-app.use("/soma", userRoute);
+const userRoute = require('./src/routes/user.route')
+
+const port = 3000;
+
+app.use(express.json());
+app.use("/user", userRoute);
 
 
 //ROTA é a porta de entrada da nossa API, do nosso backend
@@ -19,4 +23,4 @@ app.use("/soma", userRoute);
 
 //header é um metadado que é o dado dos dados. É onde configura os dados
 
-app.listen(3000);
+app.listen(port, () => console.log(`Servidor rodando na porta ${port}`));
