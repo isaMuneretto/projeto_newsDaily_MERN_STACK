@@ -1,10 +1,14 @@
-const express = require('express');
+//Este projeto utiliza a forma atual ES module 
+// CommonJS module: ex /* const express = require('express'); */
+
+import express from "express";
+import connectDatabase from "./src/database/db.js";
+import userRoute from "./src/routes/user.route.js";
+
 const app = express();
-
-const userRoute = require('./src/routes/user.route')
-
 const port = 3000;
 
+connectDatabase();
 app.use(express.json());
 app.use("/user", userRoute);
 

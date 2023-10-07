@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "API for SPA News Daily",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node index",
     "dev": "nodemon index"
@@ -11,7 +12,9 @@
   "author": "Isa Muneretto",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "express": "^4.18.2",
+    "mongoose": "^7.5.1",
     "nodemon": "^3.0.1"
   }
 }

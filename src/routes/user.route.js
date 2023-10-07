@@ -1,6 +1,14 @@
-const route = require('express').Router();
-const userController = require('../controllers/user.controller')
+import express from 'express';
+const router = express.Router();
 
-route.post("/", userController.create);
+import userController from "../controllers/user.controller.js"
+import { validId, validUser } from "../middlewares/global.middlewares.js"
 
-module.exports = route;
+router.post("/", userController.create);
+router.get("/", userController.findAll);
+router.get("/:id", validId, validUser, userController.findById);
+router.patch("/:id", validId, validUser, userController.update);
+//PUT atualiza o objeto ou documento inteiro sobrescreve todos os dados enviados
+//PATCH atualiza apenas o dado enviado.ex: só o nome ou só o email
+
+export default router;
