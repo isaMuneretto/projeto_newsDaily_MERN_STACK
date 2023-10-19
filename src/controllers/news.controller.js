@@ -1,6 +1,6 @@
-import { createService, findAllService, countNews, topNewsService } from "../services/news.service.js";
+import { createService, findAllService, countNews, topNewsService, findByIdService } from "../services/news.service.js";
 
-const create = async (req, res) => {
+export const create = async (req, res) => {
     try {
         const { authorization } = req.headers;
 
@@ -39,7 +39,7 @@ const create = async (req, res) => {
     }
 };
 
-const findAll = async (req, res) => {
+export const findAll = async (req, res) => {
     try {
         let { limit, offset } = req.query;  //como transforma o valor não pode ser constante
 
@@ -98,7 +98,7 @@ const findAll = async (req, res) => {
     }
 };
 
-const topNews = async (req, res) => {
+export const topNews = async (req, res) => {
     try {
         const news = await topNewsService();
 
@@ -124,4 +124,26 @@ const topNews = async (req, res) => {
     }
 };
 
-export { create, findAll, topNews };
+export const findById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const news = await findByIdService(id); //como vai no banco de dados fazer uma busca precisa esperar aqui
+
+        res.send({
+            news: {
+                id: news._id,
+                title: news.title,
+                text: news.text,
+                banner: news.banner,
+                likes: news.likes,
+                comments: news.comments,
+                user: news.user.name,
+                username: news.user.username,
+                userAvatar: news.user.avatar,
+            },
+        })
+    } catch (err) {
+        res.status(500).send({ message: err.message })
+    }
+};
