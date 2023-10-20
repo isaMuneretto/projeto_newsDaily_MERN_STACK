@@ -14,3 +14,5 @@ export const findByIdService = (id) => News.findById(id).populate("user"); //vai
 export const searchByTitleService = async (title) => News.find({
     title: { $regex: `${title || ""}`, $options: "i" }, //o "i" é de case insensitive, não diferencia maiuscula de minuscula
 }).sort({ _id: -1 }).populate("user");
+
+export const byUserService = async (id) => News.find ({ user: id }).sort({ _id: -1 }).populate("user");
