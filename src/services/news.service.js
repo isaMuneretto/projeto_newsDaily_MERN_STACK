@@ -7,6 +7,10 @@ export const findAllService = (offset, limit) => News.find().sort({ _id: -1 }).s
 
 export const countNews = () => News.countDocuments(); //função do mongoose
 
-export const topNewsService = () => News.findOne().sort({ _id: -1 }).populate("user"); 
+export const topNewsService = () => News.findOne().sort({ _id: -1 }).populate("user");
 
 export const findByIdService = (id) => News.findById(id).populate("user"); //vai no banco de dados fazer uma busca 
+
+export const searchByTitleService = async (title) => News.find({
+    title: { $regex: `${title || ""}`, $options: "i" }, //o "i" é de case insensitive, não diferencia maiuscula de minuscula
+}).sort({ _id: -1 }).populate("user");
