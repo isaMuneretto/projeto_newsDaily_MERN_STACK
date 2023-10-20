@@ -11,8 +11,11 @@ export const topNewsService = () => News.findOne().sort({ _id: -1 }).populate("u
 
 export const findByIdService = (id) => News.findById(id).populate("user"); //vai no banco de dados fazer uma busca 
 
-export const searchByTitleService = async (title) => News.find({
+export const searchByTitleService = (title) => News.find({
     title: { $regex: `${title || ""}`, $options: "i" }, //o "i" é de case insensitive, não diferencia maiuscula de minuscula
 }).sort({ _id: -1 }).populate("user");
 
-export const byUserService = async (id) => News.find ({ user: id }).sort({ _id: -1 }).populate("user");
+export const byUserService = (id) => News.find({ user: id }).sort({ _id: -1 }).populate("user");
+
+export const updateService = (id, title, text, banner) =>
+    News.findOneAndUpdate({ _id: id }, {title, text, banner}, {rawResult: true});//primeiro parametro é qual item e o segundo é o que dentro do item

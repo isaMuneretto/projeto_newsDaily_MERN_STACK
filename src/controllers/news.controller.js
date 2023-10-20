@@ -1,4 +1,13 @@
-import { createService, findAllService, countNews, topNewsService, findByIdService, searchByTitleService, byUserService } from "../services/news.service.js";
+import { 
+    createService,
+    findAllService,
+    countNews, 
+    topNewsService, 
+    findByIdService, 
+    searchByTitleService, 
+    byUserService,
+    updateService,
+ } from "../services/news.service.js";
 
 export const create = async (req, res) => {
     try {
@@ -193,6 +202,31 @@ export const byUser = async (req, res) => {
                 userAvatar: item.user.avatar,
             })),
         });
+    } catch (err) {
+        res.status(500).send({ message: err.message })
+    }
+};
+
+export const update = async (req, res) => {
+    try {
+        const { title, text, banner } = req.body;
+        const { id } = req.params;
+
+        if (!title && !text && !banner) {
+            res.status(400).send({ message: "Submit at least  one field  to update the post" });
+        }
+
+        const news = await findByIdService(id); //verifica se a news é da pessoa que criou
+
+        /* console.log(typeof news.user._id, typeof req.userId ) verifica se o tipo das comparação do if abaixo */
+
+        if (String(news.user._id) !== req.userId ) { //verifica se a news do usuario é diferente de quem esta logado
+            return res.status(400).send({ message: "You didn't update this post" })
+        }
+
+        await updateService (id, title, text, banner); //lembrando que precisa ser na mesma ordem do service pois sao parametros
+
+        return res.send({ message: "Post sucessfully updated!" });
     } catch (err) {
         res.status(500).send({ message: err.message })
     }
