@@ -19,3 +19,5 @@ export const byUserService = (id) => News.find({ user: id }).sort({ _id: -1 }).p
 
 export const updateService = (id, title, text, banner) =>
     News.findOneAndUpdate({ _id: id }, {title, text, banner}, {rawResult: true});//primeiro parametro é qual item e o segundo é o que dentro do item
+
+export const eraseService = (id) => News.findByIdAndDelete({ _id: id });

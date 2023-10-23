@@ -7,6 +7,7 @@ import {
     searchByTitleService, 
     byUserService,
     updateService,
+    eraseService,
  } from "../services/news.service.js";
 
 export const create = async (req, res) => {
@@ -213,7 +214,7 @@ export const update = async (req, res) => {
         const { id } = req.params;
 
         if (!title && !text && !banner) {
-            res.status(400).send({ message: "Submit at least  one field  to update the post" });
+            res.status(400).send({ message: "Submit at least  one field  to update the news" });
         }
 
         const news = await findByIdService(id); //verifica se a news é da pessoa que criou
@@ -221,13 +222,31 @@ export const update = async (req, res) => {
         /* console.log(typeof news.user._id, typeof req.userId ) verifica se o tipo das comparação do if abaixo */
 
         if (String(news.user._id) !== req.userId ) { //verifica se a news do usuario é diferente de quem esta logado
-            return res.status(400).send({ message: "You didn't update this post" })
+            return res.status(400).send({ message: "You didn't update this news" })
         }
 
         await updateService (id, title, text, banner); //lembrando que precisa ser na mesma ordem do service pois sao parametros
 
-        return res.send({ message: "Post sucessfully updated!" });
+        return res.send({ message: "News sucessfully updated!" });
     } catch (err) {
         res.status(500).send({ message: err.message })
     }
+};
+
+export const erase = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const news = await findByIdService(id);
+
+        if (String(news.user._id) !== req.userId ) { //verifica se a news do usuario é diferente de quem esta logado
+            return res.status(400).send({ message: "You didn't delete this news" })
+        }
+
+        await eraseService(id);
+
+        return res.send({ message: "News sucessfully deleted!"})
+    } catch (err) {
+        res.status(500).send({ message: err.message })
+    } 
 };
