@@ -18,6 +18,12 @@ export const searchByTitleService = (title) => News.find({
 export const byUserService = (id) => News.find({ user: id }).sort({ _id: -1 }).populate("user");
 
 export const updateService = (id, title, text, banner) =>
-    News.findOneAndUpdate({ _id: id }, {title, text, banner}, {rawResult: true});//primeiro parametro é qual item e o segundo é o que dentro do item
+    News.findOneAndUpdate({ _id: id }, { title, text, banner }, { rawResult: true });//primeiro parametro é qual item e o segundo é o que dentro do item
 
 export const eraseService = (id) => News.findByIdAndDelete({ _id: id });
+
+export const likeNewsService = (idNews, userId) => News.findOneAndUpdate({ _id: idNews, "likes.userId": { $nin: [userId] } }, { $push: { likes: { userId, created: new Date() } } }); //idNews foi criado aqui pq posso colocar o nome que eu quiser
+//findOne analisa o array de likes, busca pelo idNews e faz alguma coisa
+//push adiciona um item na array no campo likes 
+
+export const deleteLikeNewsService = (idNews, userId) => News.findOneAndUpdate({ _id: idNews }, { $pull: { likes: { userId} } }); //pull para retirar
