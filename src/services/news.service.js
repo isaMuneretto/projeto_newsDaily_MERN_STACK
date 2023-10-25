@@ -26,4 +26,14 @@ export const likeNewsService = (idNews, userId) => News.findOneAndUpdate({ _id: 
 //findOne analisa o array de likes, busca pelo idNews e faz alguma coisa
 //push adiciona um item na array no campo likes 
 
-export const deleteLikeNewsService = (idNews, userId) => News.findOneAndUpdate({ _id: idNews }, { $pull: { likes: { userId} } }); //pull para retirar
+export const deleteLikeNewsService = (idNews, userId) => News.findOneAndUpdate({ _id: idNews }, { $pull: { likes: { userId } } }); //pull para retirar
+
+export const addCommentService = (idNews, comment, userId) => {
+    const idComment = Math.floor(Date.now() * Math.random()).toString(36);//math floor (arredonda) pega a data do dia vezes numero aleatorio e transforma em string 36 carac.
+
+    return News.findOneAndUpdate({ _id: idNews }, { $push: { comments: { idComment, userId, comment, createdAt: new Date() }, } }); //precisa de return porque a função esta em bloco (não é arrow function)
+}
+//diferente do like, cada comentario vai precisar ter um id pq cada usuario vai poder comentar varias vezes
+//usando JS puro
+
+export const deleteCommentService = (idNews, idComment, userId) => News.findOneAndUpdate({ _id: idNews }, { $pull: { comments: { idComment, userId }, } });
