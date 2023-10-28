@@ -4,27 +4,18 @@
       "title": "Breaking News API Documentation",
       "description": "In this documentation you will be able to consult the API end-points and also test all available routes. Do not forget to register and carry out the authorization.",
       "contact": {
-        "email": "docencia.thiago@gmail.com"
+        "email": "isamuneretto@gmail.com"
       },
       "version": "1.0.0"
     },
-    "servers": [
-      {
-        "url": "https://api-breakingnews.onrender.com",
-        "description": "Render"
-      },
-  
+    "servers": [  
       {
         "url": "http://localhost:3000",
-        "description": "Local"
-      },
-      {
-        "url": "https://breakingnews.herokuapp.com",
-        "description": "Heroku"
+        "description": "Local Server"
       }
     ],
     "paths": {
-      "/user/create": {
+      "/user/": {
         "post": {
           "summary": "Create a new user",
           "description": "Route responsible for creating a new user",
@@ -38,12 +29,12 @@
                 "examples": {
                   "Users": {
                     "value": {
-                      "name": "Cacau Lima",
-                      "username": "cacode",
-                      "email": "clima@gmail.com",
-                      "password": "12345",
-                      "avatar": "https://i.imgur.com/Ry1cb5M.png",
-                      "background": "https://images.wallpapersden.com/image/download/triangle-8k-blue-pattern_bGZlbmiUmZqaraWkpJRmbmdlrWZlbWU.jpg"
+                      "name": "Teste Swagger 3",
+                      "username": "Testeswagger3",
+                      "email": "testeswagger@gmail.com",
+                      "password": "123",
+                      "avatar": "...",
+                      "background": "..."
                     }
                   }
                 }
@@ -97,7 +88,7 @@
           }
         }
       },
-      "/user/findById/{id}": {
+      "/user/{id}/": {
         "get": {
           "summary": "Search user by id",
           "description": "Route responsible for searching for user by id",
@@ -133,7 +124,7 @@
           }
         }
       },
-      "/user/update/{id}": {
+      "/user/{id}": {
         "patch": {
           "summary": "Update user by id",
           "description": "Route responsible for editing the user by id",
@@ -157,7 +148,7 @@
                 "examples": {
                   "Users": {
                     "value": {
-                      "name": "Thiago Lima"
+                      "name": "Teste Swagger Alterado 3"
                     }
                   }
                 }
@@ -185,7 +176,7 @@
           }
         }
       },
-      "/auth/login": {
+      "/auth": {
         "post": {
           "summary": "Login to Breaking News",
           "description": "Route responsible for logging in a registered user",
@@ -199,8 +190,8 @@
                 "examples": {
                   "User": {
                     "value": {
-                      "email": "docencia.thiago@gmail.com",
-                      "password": "12345"
+                      "email": "testeswagger@gmail.com",
+                      "password": "123"
                     }
                   }
                 }
@@ -217,7 +208,7 @@
           }
         }
       },
-      "/posts/create": {
+      "/news/": {
         "post": {
           "summary": "Create a new post",
           "description": "Route responsible for creating a new Post",
@@ -265,7 +256,7 @@
           }
         }
       },
-      "/posts": {
+      "/news": {
         "get": {
           "summary": "Search all posts",
           "description": "Route responsible for fetching all posts",
@@ -302,7 +293,7 @@
           }
         }
       },
-      "/posts/top": {
+      "/news/top": {
         "get": {
           "summary": "Search top post",
           "description": "Route responsible for fetching top post",
@@ -325,7 +316,7 @@
           }
         }
       },
-      "/posts/search": {
+      "/news/search": {
         "get": {
           "summary": "Search posts by title",
           "description": "Route responsible for fetching the posts that match the title sent via query params",
@@ -358,8 +349,8 @@
           }
         }
       },
-      "/posts/byIdPost/{id}": {
-        "patch": {
+      "/news/{id}/": {
+        "get": {
           "summary": "Search post by id",
           "description": "Route responsible for fetching post by id",
           "tags": ["Post"],
@@ -394,7 +385,7 @@
           }
         }
       },
-      "/posts/byUserId": {
+      "/news/byUser ": {
         "get": {
           "summary": "Search posts by use id",
           "description": "Route responsible for fetching posts by use id",
@@ -422,7 +413,7 @@
           }
         }
       },
-      "/posts/upadate/{id}": {
+      "/news/{id}": {
         "patch": {
           "summary": "Update a post",
           "description": "Route responsible for updating a Post",
@@ -476,7 +467,7 @@
           }
         }
       },
-      "/posts/delete/{id}": {
+      "/news/delete/{id}/": {
         "delete": {
           "summary": "Delete a post",
           "description": "Route responsible for deleting a Post",
@@ -504,7 +495,7 @@
           }
         }
       },
-      "/posts/{id}/like": {
+      "/news/like/{id}": {
         "patch": {
           "summary": "Like a post",
           "description": "Route responsible for liking a post",
@@ -532,7 +523,7 @@
           }
         }
       },
-      "/posts/{id}/comment": {
+      "/news/comment/{id}": {
         "patch": {
           "summary": "Comment on a post",
           "description": "Route responsible for commenting on a post",
