@@ -214,8 +214,8 @@
       },
       "/news/": {
         "post": {
-          "summary": "Create a new post",
-          "description": "Route responsible for creating a new Post",
+          "summary": "Create a new news",
+          "description": "Route responsible for creating a new News",
           "tags": ["Post"],
           "security": [{ "bearerAuth": [] }],
           "requestBody": {
@@ -262,8 +262,8 @@
       },
       "/news": {
         "get": {
-          "summary": "Search all posts",
-          "description": "Route responsible for fetching all posts",
+          "summary": "Search all news",
+          "description": "Route responsible for fetching all news",
           "tags": ["Post"],
           "parameters": [
             {
@@ -297,66 +297,10 @@
           }
         }
       },
-      "/news/top": {
-        "get": {
-          "summary": "Search top post",
-          "description": "Route responsible for fetching top post",
-          "tags": ["Post"],
-          "responses": {
-            "400": {
-              "description": "Not Found"
-            },
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schemma": {
-                    "type": "object",
-                    "$ref": "#/components/schemas/Post"
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
-      "/news/search": {
-        "get": {
-          "summary": "Search posts by title",
-          "description": "Route responsible for fetching the posts that match the title sent via query params",
-          "tags": ["Post"],
-          "parameters": [
-            {
-              "in": "query",
-              "name": "title",
-              "type": "string",
-              "required": true
-            }
-          ],
-          "responses": {
-            "400": {
-              "description": "Not Found"
-            },
-            "200": {
-              "description": "OK",
-              "content": {
-                "application/json": {
-                  "schema": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/Post"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      },
       "/news/{id}/": {
         "get": {
-          "summary": "Search post by id",
-          "description": "Route responsible for fetching post by id",
+          "summary": "Search news by id",
+          "description": "Route responsible for fetching news by id",
           "tags": ["Post"],
           "security": [{ "bearerAuth": [] }],
           "parameters": [
@@ -389,10 +333,66 @@
           }
         }
       },
+      "/news/top": {
+        "get": {
+          "summary": "Search top news",
+          "description": "Route responsible for fetching top news",
+          "tags": ["Post"],
+          "responses": {
+            "400": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schemma": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Post"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/news/search": {
+        "get": {
+          "summary": "Search News by title",
+          "description": "Route responsible for fetching the news that match the title sent via query params",
+          "tags": ["Post"],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "title",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Post"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
       "/news/byUser ": {
         "get": {
-          "summary": "Search posts by use id",
-          "description": "Route responsible for fetching posts by use id",
+          "summary": "Search news by use id",
+          "description": "Route responsible for fetching news by use id",
           "tags": ["Post"],
           "responses": {
             "400": {
@@ -417,10 +417,38 @@
           }
         }
       },
+      "/news/delete/{id}/": {
+        "delete": {
+          "summary": "Delete a news",
+          "description": "Route responsible for deleting a news",
+          "tags": ["Post"],
+          "security": [{ "bearerAuth": [] }],
+          "parameters": [
+            {
+              "in": "path",
+              "name": "id",
+              "type": "string",
+              "description": "Post ID",
+              "required": true
+            }
+          ],
+          "responses": {
+            "401": {
+              "description": "Unauthorized"
+            },
+            "400": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      },
       "/news/{id}": {
         "patch": {
-          "summary": "Update a post",
-          "description": "Route responsible for updating a Post",
+          "summary": "Update a news",
+          "description": "Route responsible for updating a news",
           "tags": ["Post"],
           "security": [{ "bearerAuth": [] }],
           "parameters": [
@@ -471,38 +499,10 @@
           }
         }
       },
-      "/news/delete/{id}/": {
-        "delete": {
-          "summary": "Delete a post",
-          "description": "Route responsible for deleting a Post",
-          "tags": ["Post"],
-          "security": [{ "bearerAuth": [] }],
-          "parameters": [
-            {
-              "in": "path",
-              "name": "id",
-              "type": "string",
-              "description": "Post ID",
-              "required": true
-            }
-          ],
-          "responses": {
-            "401": {
-              "description": "Unauthorized"
-            },
-            "400": {
-              "description": "Not Found"
-            },
-            "200": {
-              "description": "OK"
-            }
-          }
-        }
-      },
       "/news/like/{id}": {
         "patch": {
-          "summary": "Like a post",
-          "description": "Route responsible for liking a post",
+          "summary": "Like a news",
+          "description": "Route responsible for liking a news",
           "tags": ["Post"],
           "security": [{ "bearerAuth": [] }],
           "parameters": [
@@ -529,8 +529,8 @@
       },
       "/news/comment/{id}": {
         "patch": {
-          "summary": "Comment on a post",
-          "description": "Route responsible for commenting on a post",
+          "summary": "Comment on a news",
+          "description": "Route responsible for commenting on a news",
           "tags": ["Post"],
           "security": [{ "bearerAuth": [] }],
           "parameters": [
@@ -570,6 +570,9 @@
             }
           }
         }
+      },
+      "/news/comment/{idNews}/{idComment}": {
+       
       }
     },
     "components": {

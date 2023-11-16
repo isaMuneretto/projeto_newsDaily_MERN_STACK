@@ -83,12 +83,15 @@ export const findAll = async (req, res) => {
         const previous = offset - limit < 0 ? null : offset - limit; //se offset for menor que limit retorna null
         const previousUrl = previous != null ? `${currentUrl}?limit=${limit}&offset=${previous}` : null; //se previous for diferente de null aí crio a url
 
-        if (news.length === 0) {
+        /* if (news.length === 0) {
             return res.status(400).send({
                 message: "There are no registered news",
             });
-        }
-        res.send({
+        } */
+
+        news.shift(); //remove primeiro elemento da lista
+
+        return res.send({
             nextUrl,
             previousUrl,
             limit,
