@@ -2,6 +2,7 @@
 // CommonJS module: ex /* const express = require('express'); */
 
 import express from "express";
+import cors from "cors";
 import connectDatabase from "./src/database/db.js";
 import dotenv from "dotenv";
 
@@ -14,6 +15,8 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 connectDatabase();
 app.use(express.json());
